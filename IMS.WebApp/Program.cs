@@ -1,4 +1,4 @@
-using IMS.Plugins.InMemory;
+﻿using IMS.Plugins.InMemory;
 using IMS.UseCases.Inventories;
 using IMS.UseCases.Inventories.Interfaces;
 using IMS.UseCases.PluginInterfaces;
@@ -9,11 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents();
 
-//Program �al??t??? s�rece �al???r. => AddScoped ile ayn? mant?k
+//Program çalıştığı sürece çalışır. => AddScoped ile aynı mantık
 builder.Services.AddSingleton<IInventoryRepository, InventoryRepository>();
 
-//Program istek yollad??? s�rece tekrardan olu?turulur.
+//Program istek yolladığı sürece tekrardan oluşturulur.
 builder.Services.AddTransient<IViewInventoriesByNameUseCase, ViewInventoriesByNameUseCase>();
+builder.Services.AddTransient<IAddInventoryUseCase, AddInventoryUseCase>();
 
 var app = builder.Build();
 

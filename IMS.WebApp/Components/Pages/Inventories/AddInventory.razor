@@ -1,0 +1,50 @@
+﻿@page "/addinventory"
+@inject IAddInventoryUseCase AddInventoryUseCase
+
+@*Microsoft tarafından oluşturulan bir sınıftır, bunun sayesinde bir işlem sonrası yönlendirme yapabiliyoruz.*@
+@inject NavigationManager NavigationManager
+
+<h3>Add Inventory</h3>
+<br />
+<EditForm Model="inventory" FormName="formInventory" OnValidSubmit="Save">
+    <DataAnnotationsValidator></DataAnnotationsValidator> @*Required için DataAnnotation kullandık bu yüzden buradada bu attribute'e ihtiyacımzı var. Kısaca hataları yakalıyor. *@
+    @*<ValidationSummary></ValidationSummary> *@@*Toplu olarak ErrorMessageları göstermek için kullandık.*@
+
+    <div class="form-group">
+        <label for="name">Inventory Name</label>
+        <InputText id="name" @bind-Value="inventory.InventoryName" class="form-control"></InputText>
+        <ValidationMessage For="() => inventory.InventoryName"></ValidationMessage>
+        @* Her sütunun altında hata mesajı görünsün istiyorsak bunu kullanıyoruz. *@
+    </div>
+
+    <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <InputNumber id="quantity" @bind-Value="inventory.Quantity" class="form-control"></InputNumber>
+        <ValidationMessage For="() => inventory.Quantity"></ValidationMessage>
+    </div>
+
+    <div class="form-group">
+        <label for="price">Price</label>
+        <InputNumber id="price" @bind-Value="inventory.Price" class="form-control"></InputNumber>
+        <ValidationMessage For="() => inventory.Price"></ValidationMessage>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-outline-success">Save</button>
+    &nbsp;
+    <a href="/inventories" class="btn btn-outline-danger">Cancel</a>
+
+</EditForm>
+
+
+@code {
+    [SupplyParameterFromForm]//Butona tıklandığında verileri tutabilmek için kullandık.
+    private Inventory inventory { get; set; } = new Inventory();
+
+    private async Task Save()
+    {
+        await AddInventoryUseCase.ExecuteAsync(inventory);
+
+        NavigationManager.NavigateTo("/inventories");
+    }
+
+}

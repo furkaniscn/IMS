@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IMS.UseCases.Inventories
+namespace IMS.UseCases.Inventories.Concrete
 {
     public class ViewInventoriesByNameUseCase : IViewInventoriesByNameUseCase
     {

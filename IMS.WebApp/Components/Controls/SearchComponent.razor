@@ -1,5 +1,10 @@
-﻿
-<EditForm Model="searchFilter" FormName="formSearch" OnSubmit="Search">
+﻿@if (searchFilter == null)
+{
+    searchFilter = string.Empty;
+}
+@* Enchance ekledik çünkü arama yaparken httpost olarak davranıp sayfayı yeniliyordu(document format)
+    bunu değişitrdik(fetch format), şu an partial olarak çalışıyor.*@
+<EditForm Enhance="true" Model="searchFilter" FormName="formSearch" OnSubmit="Search">
     <div class="input-group">
         <InputText class="form-control"
                    placeholder="Type something here to search"

@@ -31,6 +31,18 @@ namespace IMS.Plugins.InMemory
             return Task.CompletedTask;
         }
 
+        public Task DeleteInventoryByIdAsync(int inventoryId)
+        {
+            var inventory = _inventories.FirstOrDefault(x => x.InventoryId == inventoryId);
+
+            if (inventory != null)
+            {
+                _inventories.Remove(inventory);
+            }
+
+            return Task.CompletedTask;
+        }
+
         public Task EditInventoryAsync(Inventory inventory)
         {
             //Eğer güncelleme esnasında diğer verilerle aynı isim olacak şekilde güncelleme yapılırsa diye bu kodu ekledim.

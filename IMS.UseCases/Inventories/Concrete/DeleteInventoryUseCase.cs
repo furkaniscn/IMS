@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace IMS.UseCases.Inventories.Concrete
 {
-    public class EditInventoryUseCase : IEditInventoryUseCase
+    public class DeleteInventoryUseCase : IDeleteInventoryUseCase
     {
         private readonly IInventoryRepository inventoryRepository;
-        public EditInventoryUseCase(IInventoryRepository inventoryRepository)
+        public DeleteInventoryUseCase(IInventoryRepository inventoryRepository)
         {
             this.inventoryRepository = inventoryRepository;
         }
 
-        public async Task ExecuteAsync(Inventory inventory)
+        public async Task ExecuteAsync(int inventoryId)
         {
-            await inventoryRepository.EditInventoryAsync(inventory);
+            await inventoryRepository.DeleteInventoryByIdAsync(inventoryId);
         }
     }
 }

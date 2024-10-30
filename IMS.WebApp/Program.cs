@@ -9,21 +9,26 @@ using IMS.WebApp.Components;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorComponents();
+builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents();//Extension methodu ekledik aşağıda interactivity'i kodlamıştık.
+
 
 //Program çalıştığı sürece çalışır. => AddScoped ile aynı mantık
 builder.Services.AddSingleton<IInventoryRepository, InventoryRepository>();
-
 //Program istek yolladığı sürece tekrardan oluşturulur.
 builder.Services.AddTransient<IViewInventoriesByNameUseCase, ViewInventoriesByNameUseCase>();
 builder.Services.AddTransient<IAddInventoryUseCase, AddInventoryUseCase>();
 builder.Services.AddTransient<IEditInventoryUseCase, EditInventoryUseCase>();
 builder.Services.AddTransient<IDeleteInventoryUseCase, DeleteInventoryUseCase>();
 builder.Services.AddTransient<IViewInventoryByIdUseCase, ViewInventoryByIdUseCase>();
-builder.Services.AddTransient<IViewInventoryByIdUseCase, ViewInventoryByIdUseCase>();
 
 builder.Services.AddSingleton<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<IViewProductsByNameUseCase, ViewProductsByNameUseCase>();
+builder.Services.AddTransient<IAddProductUseCase, AddProductUseCase>();
+builder.Services.AddTransient<IEditProductUseCase, EditProductUseCase>();
+builder.Services.AddTransient<IDeleteProductUseCase, DeleteProductUseCase>();
+builder.Services.AddTransient<IViewProductByIdUseCase, ViewProductByIdUseCase>();
+
 
 var app = builder.Build();
 
@@ -40,6 +45,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAntiforgery();
 
-app.MapRazorComponents<App>();
-
+app.MapRazorComponents<App>()
+    .AddInteractiveServerRenderMode();
+//Burası middleware kısmı
+//Server interactivity'yi harekete geçirdik ve kullanılabilir hale getirdik ama servise ihtiyaç duyuyor.
 app.Run();

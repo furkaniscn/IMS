@@ -11,7 +11,7 @@
     <EditForm Model="inventory" FormName="formInventory" OnValidSubmit="Update">
         <DataAnnotationsValidator></DataAnnotationsValidator>
         @* Yakaladığımız Id'yi editform içinde veri update edilmeye çalışırken tutmamıza olanak sağlıyor. *@
-        <InputNumber @bind-Value="inventory.InventoryId" hidden></InputNumber>
+        <InputNumber @bind-Value="inventory.InventoryID" hidden></InputNumber>
 
         <div class="form-group">
             <label for="name">Inventory Name</label>
@@ -21,14 +21,14 @@
 
         <div class="form-group">
             <label for="quantity">Quantity</label>
-            <InputNumber id="quantity" @bind-Value="inventory.Quantity" class="form-control"></InputNumber>
-            <ValidationMessage For="() => inventory.Quantity"></ValidationMessage>
+            <InputNumber id="quantity" @bind-Value="inventory.InventoryQuantity" class="form-control"></InputNumber>
+            <ValidationMessage For="() => inventory.InventoryQuantity"></ValidationMessage>
         </div>
 
         <div class="form-group">
             <label for="price">Price</label>
-            <InputNumber id="price" @bind-Value="inventory.Price" class="form-control"></InputNumber>
-            <ValidationMessage For="() => inventory.Price"></ValidationMessage>
+            <InputNumber id="price" @bind-Value="inventory.InventoryPrice" class="form-control"></InputNumber>
+            <ValidationMessage For="() => inventory.InventoryPrice"></ValidationMessage>
         </div>
         <br />
         <button type="submit" class="btn btn-outline-success">Update</button>

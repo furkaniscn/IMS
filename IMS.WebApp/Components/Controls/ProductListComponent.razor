@@ -7,7 +7,7 @@
             <th>Quantity</th>
             <th>Price</th>
             <th></th>
-            <th style="text-align:left"></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -15,7 +15,8 @@
         {
             foreach (var inv in products)
             {
-                        <ProductListItemComponent Product="inv"></ProductListItemComponent>
+                //rendermode ile render kısmının InteractiveServer olmasını sağladık.
+                <ProductListItemComponent @rendermode="InteractiveServer" Product="inv"></ProductListItemComponent>
             }
         }
     </tbody>

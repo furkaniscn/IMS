@@ -1,0 +1,30 @@
+﻿@inject IDeleteProductUseCase DeleteProductUseCase
+@inject NavigationManager NavigationManager
+
+@if (this.Product != null)
+{
+    <tr>
+        <td>@Product.ProductName</td>
+        <td>@Product.ProductQuantity</td>
+        <td>@Product.ProductPrice.ToString("c")</td>
+        <td>
+            <a href="/editProduct/@Product.ProductID" class="btn btn-outline-warning">Edit</a>
+        </td>
+        <td>
+            <button type="button" class="btn btn-outline-danger" @onclick="async () => { await HandleDelete(Product.ProductID);}">Delete</button>
+        </td>
+    </tr>
+}
+
+@code {
+
+    [Parameter]
+    public Product? Product { get; set; }
+
+    //Parametre girdiğimiz için yukarıda arrow function kullanıyoruz.(() => kısmı)
+    private async Task HandleDelete(int productId)
+    {
+        await DeleteProductUseCase.ExecuteAsync(productId);
+        this.Product = null;//Kullanıcı arayüzünü tekrardan render etmek için bileşen durumunu belirlemek gerekir.
+    }
+}

@@ -1,0 +1,55 @@
+﻿@page "/addproduct"
+@inject IAddProductUseCase AddProductUseCase
+@inject NavigationManager NavigationManager
+
+@rendermode InteractiveServer
+
+<h3>Add Product</h3>
+<br />
+
+@* Blazor rendermode'u değiştirince FormName="formProduct" olmadan çalışabiliyor. *@
+<EditForm Model="product" OnValidSubmit="Save">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+
+    <div class="form-group">
+        <label for="name">Product Name</label>
+        <InputText id="name" @bind-Value="product.ProductName" class="form-control"></InputText>
+        <ValidationMessage For="() => product.ProductName"></ValidationMessage>
+    </div>
+
+    <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <InputNumber id="quantity" @bind-Value="product.ProductQuantity" class="form-control"></InputNumber>
+        <ValidationMessage For="() => product.ProductQuantity"></ValidationMessage>
+    </div>
+
+    <div class="form-group">
+        <label for="price">Price</label>
+        <InputNumber id="price" @bind-Value="product.ProductPrice" class="form-control"></InputNumber>
+        <ValidationMessage For="() => product.ProductPrice"></ValidationMessage>
+    </div>
+
+    <div class="form-group">
+        <label for="">Inventories</label>
+        <ProductInventoriesComponent Product="this.product"></ProductInventoriesComponent>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-outline-success">Save</button>
+    &nbsp;
+    <a href="/inventories" class="btn btn-outline-danger">Cancel</a>
+</EditForm>
+
+
+@code {
+    //[SupplyParameterFromForm]
+    // rendermode'u değiştirdiğimizden buna da ihtiyacımız yok zaten bind-Value ile otomatik olarak state of the component ile eşleşir.
+    private Product product { get; set; } = new Product();
+
+    private async Task Save()
+    {
+        await AddProductUseCase.ExecuteAsync(product);
+
+        NavigationManager.NavigateTo("/products");
+    }
+
+}

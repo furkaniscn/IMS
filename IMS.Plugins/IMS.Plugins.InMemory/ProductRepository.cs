@@ -52,6 +52,7 @@ namespace IMS.Plugins.InMemory
                 existingProduct.ProductName = product.ProductName;
                 existingProduct.ProductQuantity = product.ProductQuantity;
                 existingProduct.ProductPrice = product.ProductPrice;
+                existingProduct.ProductInventories = product.ProductInventories;
 
             }
             else

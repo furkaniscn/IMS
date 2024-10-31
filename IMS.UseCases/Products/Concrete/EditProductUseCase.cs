@@ -18,7 +18,7 @@ namespace IMS.UseCases.Products.Concrete
 
         public async Task ExecuteAsync(Product product)
         {
-            await productRepository.EditProductAsync(product);
+            await productRepository.UpdateProductAsync(product);
         }
     }
 }

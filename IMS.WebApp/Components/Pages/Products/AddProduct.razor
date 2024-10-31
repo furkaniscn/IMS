@@ -10,6 +10,7 @@
 @* Blazor rendermode'u değiştirince FormName="formProduct" olmadan çalışabiliyor. *@
 <EditForm Model="product" OnValidSubmit="Save">
     <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
 
     <div class="form-group">
         <label for="name">Product Name</label>

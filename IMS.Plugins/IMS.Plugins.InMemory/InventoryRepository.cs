@@ -43,7 +43,7 @@ namespace IMS.Plugins.InMemory
             return Task.CompletedTask;
         }
 
-        public Task EditInventoryAsync(Inventory inventory)
+        public Task UpdateInventoryAsync(Inventory inventory)
         {
             //Eğer güncelleme esnasında diğer verilerle aynı isim olacak şekilde güncelleme yapılırsa diye bu kodu ekledim.
             //Normalde database bağlandığında unique key ile bu sorunu çözüyorduk.

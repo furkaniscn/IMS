@@ -1,5 +1,5 @@
-﻿using IMS.CoreBusiness;
-using IMS.UseCases.Inventories.Concrete;
+﻿using Blazored.Toast.Services;
+using IMS.CoreBusiness;
 using IMS.UseCases.Inventories.Interfaces;
 using Microsoft.AspNetCore.Components;
 
@@ -9,6 +9,7 @@ namespace IMS.WebApp.Components.Controls
     {
         [Inject] IDeleteInventoryUseCase DeleteInventoryUseCase { get; set; }
         [Inject] NavigationManager NavigationManager { get; set; }
+        [Inject] IToastService ToastService { get; set; }
 
 
         [Parameter]
@@ -16,8 +17,23 @@ namespace IMS.WebApp.Components.Controls
 
         private async Task DeleteInventory(int inventoryId)
         {
-            await DeleteInventoryUseCase.ExecuteAsync(inventoryId);
-            NavigationManager.Refresh();
+            if (ToastService == null)
+            {
+                Console.WriteLine("ToastService is null"); 
+                return;
+            }
+
+            bool isDeleted = await DeleteInventoryUseCase.ExecuteAsync(inventoryId);
+
+            if (isDeleted)
+            {
+                ToastService.ShowSuccess("Inventory item deleted successfully.");
+                NavigationManager.Refresh();
+            }
+            else
+            {
+                ToastService.ShowWarning("Inventory item not found.");
+            }
         }
     }
 }

@@ -1,25 +1,23 @@
-﻿using IMS.CoreBusiness;
+﻿using Blazored.Toast.Services;
 using IMS.UseCases.Inventories.Interfaces;
 using IMS.UseCases.PluginInterfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IMS.UseCases.Inventories.Concrete
 {
     public class DeleteInventoryUseCase : IDeleteInventoryUseCase
     {
         private readonly IInventoryRepository inventoryRepository;
-        public DeleteInventoryUseCase(IInventoryRepository inventoryRepository)
+        private readonly IToastService ToastService;
+        public DeleteInventoryUseCase(IInventoryRepository inventoryRepository, IToastService toastService)
         {
             this.inventoryRepository = inventoryRepository;
+            ToastService = toastService;
         }
 
-        public async Task ExecuteAsync(int inventoryId)
+        public async Task<bool> ExecuteAsync(int inventoryId)
         {
-            await inventoryRepository.DeleteInventoryByIdAsync(inventoryId);
+            return await inventoryRepository.DeleteInventoryByIdAsync(inventoryId);
         }
+
     }
 }

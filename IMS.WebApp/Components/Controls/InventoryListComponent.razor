@@ -1,5 +1,8 @@
 ﻿@inherits ComponentBase
+@* @using Blazored.Toast
 
+<BlazoredToast />
+ *@
 <table class="table ">
     <thead>
         <tr>
@@ -15,7 +18,7 @@
         {
             foreach (var inv in inventories)
             {
-                <InventoryListItemComponent Inventory="inv"/>
+                <InventoryListItemComponent Inventory="inv" />
             }
         }
     </tbody>

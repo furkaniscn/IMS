@@ -5,18 +5,40 @@
     <input type="text"
            class="form-control"
            @bind-value="userInput"
-           @bind-value:event="oninput" />
+           @bind-value:event="oninput"
+           @onkeyup="OnKeyup" />
 </div>
 @if (searchResults != null && searchResults.Count > 0)
 {
     <div class="search-result">
         <ul>
-            @foreach (var item in searchResults)
-            {
-                <li @key="item.ID">
-                    @item.Name
-                </li>
+            @{
+                int itemIndex = 0;
+                foreach (var item in searchResults)
+                {
+                    <li @key="item.ID"
+                        @onclick="() => HandleSelectItem(item)"
+                        class="@(itemIndex == currentItemIndex?"selected":"")">
+                        @item.Name
+                    </li>
+                    itemIndex++;
+                }
             }
         </ul>
     </div>
 }
+
+@*  Render Fragment 
+<ModalFurkanComponent>
+    <Header>
+        Header
+    </Header>
+    <Body>
+        <InventoryListComponent>
+        <InventoryListComponent/>
+    </Body>
+    <Footer>
+        Ahmet Yurdal
+    </Footer>
+
+<ModalFurkanComponent/> *@

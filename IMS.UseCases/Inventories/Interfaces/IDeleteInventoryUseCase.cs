@@ -2,6 +2,6 @@
 {
     public interface IDeleteInventoryUseCase
     {
-        Task ExecuteAsync(int inventoryId);
+        Task<bool> ExecuteAsync(int inventoryId);
     }
 }

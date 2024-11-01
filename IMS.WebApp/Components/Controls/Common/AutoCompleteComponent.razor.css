@@ -15,3 +15,7 @@ div ul {
     div ul li {
         cursor: pointer;
     }
+
+.selected {
+    background-color: antiquewhite
+}

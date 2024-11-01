@@ -1,4 +1,5 @@
-﻿using IMS.Plugins.InMemory;
+﻿using Blazored.Toast;
+using IMS.Plugins.InMemory;
 using IMS.UseCases.Activities.Concrete;
 using IMS.UseCases.Activities.Interfaces;
 using IMS.UseCases.Inventories.Concrete;
@@ -14,6 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();//Extension methodu ekledik aşağıda interactivity'i kodlamıştık.
 
+builder.Services.AddBlazoredToast();
 
 //Program çalıştığı sürece çalışır. => AddScoped ile aynı mantık
 builder.Services.AddSingleton<IInventoryRepository, InventoryRepository>();

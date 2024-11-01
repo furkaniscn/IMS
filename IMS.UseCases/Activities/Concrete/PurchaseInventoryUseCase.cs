@@ -27,7 +27,7 @@ namespace IMS.UseCases.Activities.Concrete
             inventoryTransactionRepository.PurchaseAsync(poNumber, inventory, quantity, doneBy, inventory.InventoryPrice);
 
             //Increase the quantity
-            inventory.InventoryQuantity = quantity;
+            inventory.InventoryQuantity += quantity;
             await inventoryRepository.UpdateInventoryAsync(inventory);
         }
 

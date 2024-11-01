@@ -1,4 +1,4 @@
-﻿@inject IViewProductsByNameUseCase ViewProductsByNameUseCase
+﻿@inherits ComponentBase
 
 <table class="table ">
     <thead>
@@ -16,20 +16,8 @@
             foreach (var inv in products)
             {
                 //rendermode ile render kısmının InteractiveServer olmasını sağladık.
-                <ProductListItemComponent @rendermode="InteractiveServer" Product="inv"></ProductListItemComponent>
+                <ProductListItemComponent @rendermode="InteractiveServer" Product="inv"/>
             }
         }
     </tbody>
 </table>
-
-@code {
-    private List<Product>? products;
-
-    [Parameter]
-    public string? SearchProductFilter { get; set; }
-
-    protected override async Task OnParametersSetAsync()
-    {
-        products = (await ViewProductsByNameUseCase.ExecuteAsync(SearchProductFilter ?? string.Empty)).ToList();
-    }
-}

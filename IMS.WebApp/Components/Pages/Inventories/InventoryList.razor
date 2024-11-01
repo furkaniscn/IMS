@@ -1,22 +1,14 @@
 ﻿@page "/inventories"
+@inherits ComponentBase
 
 <h3>Inventory List</h3>
 <br />
 
 
-<SearchComponent OnSearch="HandleSearch"></SearchComponent>
+<SearchComponent OnSearch="HandleSearch" />
 <br />
 
-<InventoryListComponent SearchInventoryFilter="@inventoryNameToSearch"></InventoryListComponent>
+<InventoryListComponent SearchInventoryFilter="@inventoryNameToSearch" />
 <br />
 
 <a href="/addinventory" class="btn btn-outline-success">Add Inventory</a>
-
-@code {
-    private string? inventoryNameToSearch;
-
-    private void HandleSearch(string searchFilter)
-    {
-        inventoryNameToSearch = searchFilter;
-    }
-}

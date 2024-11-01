@@ -1,5 +1,4 @@
-﻿@inject IDeleteInventoryUseCase DeleteInventoryUseCase
-@inject NavigationManager NavigationManager
+﻿@inherits ComponentBase
 
 @if (this.Inventory != null)
 {
@@ -20,15 +19,3 @@
     </tr>
 }
 
-
-@code {
-
-    [Parameter]
-    public Inventory? Inventory { get; set; }
-
-    private async Task DeleteInventory(int inventoryId)
-    {
-        await DeleteInventoryUseCase.ExecuteAsync(inventoryId);
-        NavigationManager.Refresh();
-    }
-}

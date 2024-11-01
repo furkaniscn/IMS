@@ -1,8 +1,5 @@
 ﻿@page "/addinventory"
-@inject IAddInventoryUseCase AddInventoryUseCase
-
-@*Microsoft tarafından oluşturulan bir sınıftır, bunun sayesinde bir işlem sonrası yönlendirme yapabiliyoruz.*@
-@inject NavigationManager NavigationManager
+@inherits ComponentBase
 
 <h3>Add Inventory</h3>
 <br />
@@ -35,17 +32,3 @@
     <a href="/inventories" class="btn btn-outline-danger">Cancel</a>
 
 </EditForm>
-
-
-@code {
-    [SupplyParameterFromForm]//Butona tıklandığında verileri tutabilmek için kullandık.
-    private Inventory inventory { get; set; } = new Inventory();
-
-    private async Task Save()
-    {
-        await AddInventoryUseCase.ExecuteAsync(inventory);
-
-        NavigationManager.NavigateTo("/inventories");
-    }
-
-}

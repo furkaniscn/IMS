@@ -1,7 +1,6 @@
 ﻿@page "/addproduct"
-@inject IAddProductUseCase AddProductUseCase
-@inject NavigationManager NavigationManager
 @rendermode InteractiveServer
+@inherits ComponentBase
 
 <h3>Add Product</h3>
 <br />
@@ -31,25 +30,10 @@
 
     <div class="form-group">
         <label for="">Inventories</label>
-        <ProductInventoriesComponent Product="this.product"></ProductInventoriesComponent>
+        <ProductInventoriesComponent Product="this.product"/>
     </div>
     <br />
     <button type="submit" class="btn btn-outline-success">Save</button>
     &nbsp;
     <a href="/products" class="btn btn-outline-danger">Cancel</a>
 </EditForm>
-
-
-@code {
-    //[SupplyParameterFromForm]
-    // rendermode'u değiştirdiğimizden buna da ihtiyacımız yok zaten bind-Value ile otomatik olarak state of the component ile eşleşir.
-    private Product product { get; set; } = new Product();
-
-    private async Task Save()
-    {
-        await AddProductUseCase.ExecuteAsync(product);
-
-        NavigationManager.NavigateTo("/products");
-    }
-
-}

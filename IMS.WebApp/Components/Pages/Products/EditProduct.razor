@@ -1,8 +1,6 @@
 ﻿@page "/editproduct/{ProductId:int}"
-@inject IViewProductByIdUseCase ViewProductByIdUseCase
 @rendermode InteractiveServer
-@inject IEditProductUseCase EditProductUseCase
-@inject NavigationManager NavigationManager
+@inherits ComponentBase
 
 <h3>Edit Product</h3>
 <br />
@@ -32,32 +30,11 @@
 
         <div class="form-group">
             <label for="">Inventories</label>
-            <ProductInventoriesComponent Product="this.product"></ProductInventoriesComponent>
+            <ProductInventoriesComponent Product="this.product" />
         </div>
         <br />
         <button type="submit" class="btn btn-outline-success">Update</button>
         &nbsp;
         <a href="/products" class="btn btn-outline-danger">Cancel</a>
     </EditForm>
-}
-
-@code {
-    private Product? product;
-
-    [Parameter]
-    public int ProductId { get; set; }
-
-    protected override async Task OnParametersSetAsync()
-    {
-        this.product = await ViewProductByIdUseCase.ExecuteAsync(this.ProductId);
-    }
-
-    private async Task Update()
-    {
-        if (product != null)
-        {
-            await EditProductUseCase.ExecuteAsync(this.product);
-            NavigationManager.NavigateTo("/products");
-        }
-    }
 }

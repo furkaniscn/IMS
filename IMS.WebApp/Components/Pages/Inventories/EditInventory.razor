@@ -1,7 +1,5 @@
 ﻿@page "/editinventory/{InvId:int}"
-@inject IEditInventoryUseCase EditInventoryUseCase
-@inject IViewInventoryByIdUseCase ViewInventoryByIdUseCase
-@inject NavigationManager NavigationManager
+@inherits ComponentBase
 
 <h3>Edit Inventory</h3>
 <br />
@@ -36,27 +34,4 @@
         <a href="/inventories" class="btn btn-outline-danger">Cancel</a>
 
     </EditForm>
-}
-
-@code {
-
-    [Parameter]
-    public int InvId { get; set; }
-
-    [SupplyParameterFromForm]
-    private Inventory? inventory { get; set; }
-
-    protected override async Task OnParametersSetAsync()
-    {
-        this.inventory ??= await ViewInventoryByIdUseCase.ExecuteAsync(this.InvId);
-    }
-
-    private async Task Update()
-    {
-        if (inventory != null)
-        {
-            await EditInventoryUseCase.ExecuteAsync(inventory);
-            NavigationManager.NavigateTo("/inventories");
-        }
-    }
 }

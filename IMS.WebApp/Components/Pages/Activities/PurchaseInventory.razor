@@ -1,22 +1,8 @@
 ﻿@page "/purchase"
-@using static IMS.WebApp.Components.Controls.Common.AutoCompleteComponent
-@inject IViewInventoriesByNameUseCase ViewInventoriesByNameUseCase
 @rendermode InteractiveServer
+@inherits ComponentBase
 
 <h3>Purchase Inventory</h3>
 <br />
 
-<AutoCompleteComponent Label="Inventory"
-                       SearchFunction="SearchInventory"></AutoCompleteComponent>
-
-@code {
-
-    private List<ItemViewModel>? SearchInventory(string name)
-    {
-        var list = ViewInventoriesByNameUseCase.ExecuteAsync(name).GetAwaiter().GetResult();
-        if (list == null) return null;
-
-        return list.Select(x => new ItemViewModel { ID = x.InventoryID, Name = x.InventoryName })?.ToList();
-    }
-
-}
+<AutoCompleteComponent Label="Inventory" SearchFunction="SearchInventory" />

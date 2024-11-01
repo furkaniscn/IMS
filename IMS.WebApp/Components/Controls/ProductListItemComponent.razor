@@ -1,5 +1,4 @@
-﻿@inject IDeleteProductUseCase DeleteProductUseCase
-@inject NavigationManager NavigationManager
+﻿@inherits ComponentBase
 
 @if (this.Product != null)
 {
@@ -14,17 +13,4 @@
             <button type="button" class="btn btn-outline-danger" @onclick="async () => { await HandleDelete(Product.ProductID);}">Delete</button>
         </td>
     </tr>
-}
-
-@code {
-
-    [Parameter]
-    public Product? Product { get; set; }
-
-    //Parametre girdiğimiz için yukarıda arrow function kullanıyoruz.(() => kısmı)
-    private async Task HandleDelete(int productId)
-    {
-        await DeleteProductUseCase.ExecuteAsync(productId);
-        this.Product = null;//Kullanıcı arayüzünü tekrardan render etmek için bileşen durumunu belirlemek gerekir.
-    }
 }

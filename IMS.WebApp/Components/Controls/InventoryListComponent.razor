@@ -1,4 +1,4 @@
-﻿@inject IViewInventoriesByNameUseCase ViewInventoriesByNameUseCase
+﻿@inherits ComponentBase
 
 <table class="table ">
     <thead>
@@ -15,20 +15,8 @@
         {
             foreach (var inv in inventories)
             {
-                <InventoryListItemComponent Inventory="inv"></InventoryListItemComponent>
+                <InventoryListItemComponent Inventory="inv"/>
             }
         }
     </tbody>
 </table>
-
-@code {
-    private List<Inventory>? inventories;
-
-    [Parameter]
-    public string? SearchInventoryFilter { get; set; }
-
-    protected override async Task OnParametersSetAsync()
-    {
-        inventories = (await ViewInventoriesByNameUseCase.ExecuteAsync(SearchInventoryFilter ?? string.Empty)).ToList();
-    }
-}

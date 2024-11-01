@@ -1,22 +1,14 @@
 ﻿@page "/products"
+@inherits ComponentBase
 
 <h3>Product List</h3>
 <br />
 
 
-<SearchComponent OnSearch="HandleSearch"></SearchComponent>
+<SearchComponent OnSearch="HandleSearch" />
 <br />
 
-<ProductListComponent SearchProductFilter="@productNameToSearch"></ProductListComponent>
+<ProductListComponent SearchProductFilter="@productNameToSearch" />
 <br />
 
 <a href="/addProduct" class="btn btn-outline-success">Add Product</a>
-
-@code {
-    private string? productNameToSearch;
-
-    private void HandleSearch(string searchFilter)
-    {
-        productNameToSearch = searchFilter;
-    }
-}
